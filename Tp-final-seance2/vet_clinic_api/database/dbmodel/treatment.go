@@ -15,9 +15,7 @@ type Treatment struct {
 	Dosage   string `json:"dosage"`
 }
 
-// Bind implémente l'interface render.Binder pour Treatment.
 func (t *Treatment) Bind(r *http.Request) error {
-	// Validation simple des champs obligatoires
 	if strings.TrimSpace(t.Medicine) == "" {
 		return errors.New("medicine is required")
 	}

@@ -9,11 +9,11 @@ import (
 func Routes(cfg *config.Config) chi.Router {
 	r := chi.NewRouter()
 
-	r.Post("/", CreateTreatment(cfg))                                         // POST /treatments
-	r.Get("/", GetAllTreatments(cfg))                                         // GET /treatments
-	r.Get("/{id}", GetTreatmentByID(cfg))                                     // GET /treatments/{id}
-	r.Put("/{id}", UpdateTreatment(cfg))                                      // PUT /treatments/{id}
-	r.Delete("/{id}", DeleteTreatment(cfg))                                   // DELETE /treatments/{id}
+	r.Post("/", CreateTreatment(cfg))                                         
+	r.Get("/", GetAllTreatments(cfg))                                        
+	r.Get("/{id}", GetTreatmentByID(cfg))                                     
+	r.Put("/{id}", UpdateTreatment(cfg))                                      
+	r.Delete("/{id}", DeleteTreatment(cfg))                                  
 
 	return r
 }

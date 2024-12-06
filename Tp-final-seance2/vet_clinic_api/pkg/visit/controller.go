@@ -14,7 +14,7 @@ import (
 func CreateVisit(cfg *config.Config) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var visit dbmodel.Visit
-		if err := render.DecodeJSON(r.Body, &visit); err != nil { // Utilisation de DecodeJSON pour décoder le payload
+		if err := render.DecodeJSON(r.Body, &visit); err != nil { 
 			http.Error(w, "Invalid request payload", http.StatusBadRequest)
 			return
 		}
@@ -29,7 +29,7 @@ func CreateVisit(cfg *config.Config) http.HandlerFunc {
 
 func GetAllVisits(cfg *config.Config) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		visits, err := cfg.VisitRepo.FindAll() // Assurez-vous que cette méthode existe dans l'implémentation
+		visits, err := cfg.VisitRepo.FindAll() 
 		if err != nil {
 			http.Error(w, "Failed to fetch visits", http.StatusInternalServerError)
 			return
@@ -40,13 +40,13 @@ func GetAllVisits(cfg *config.Config) http.HandlerFunc {
 
 func GetVisitByID(cfg *config.Config) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		id, err := strconv.Atoi(chi.URLParam(r, "id")) // Conversion de l'ID en entier
+		id, err := strconv.Atoi(chi.URLParam(r, "id")) 
 		if err != nil {
 			http.Error(w, "Invalid ID", http.StatusBadRequest)
 			return
 		}
 
-		visit, err := cfg.VisitRepo.FindByID(uint(id)) // Utilisation correcte de FindByID
+		visit, err := cfg.VisitRepo.FindByID(uint(id)) 
 		if err != nil {
 			http.Error(w, "Visit not found", http.StatusNotFound)
 			return
@@ -64,7 +64,7 @@ func UpdateVisit(cfg *config.Config) http.HandlerFunc {
 		}
 
 		var visit dbmodel.Visit
-		if err := render.DecodeJSON(r.Body, &visit); err != nil { // DecodeJSON pour lire le body
+		if err := render.DecodeJSON(r.Body, &visit); err != nil { 
 			http.Error(w, "Invalid request payload", http.StatusBadRequest)
 			return
 		}
@@ -86,7 +86,7 @@ func DeleteVisit(cfg *config.Config) http.HandlerFunc {
 			return
 		}
 
-		if err := cfg.VisitRepo.Delete(uint(id)); err != nil { // Assurez-vous que Delete accepte un uint
+		if err := cfg.VisitRepo.Delete(uint(id)); err != nil { 
 			http.Error(w, "Failed to delete visit", http.StatusInternalServerError)
 			return
 		}
